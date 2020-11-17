@@ -20,11 +20,11 @@ jobs:
     - name: Merge into master
       run: |
         git checkout master
-        git merge ${{ jobs.merge_release_branch.env.BRANCH_NAME }}
+        git merge ${{ BRANCH_NAME }}
     - name: Delete release branch
       run: |
-        git branch --delete ${{ jobs.merge_release_branch.env.BRANCH_NAME }}
-        git push --delete ${{ jobs.merge_release_branch.env.BRANCH_NAME }}
+        git branch --delete ${{ BRANCH_NAME }}
+        git push --delete ${{ BRANCH_NAME }}
   create_tag:
     needs: merge_release_branch
     runs-on: ubuntu-20.04
