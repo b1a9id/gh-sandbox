@@ -1,0 +1,63 @@
+name: Finish release branch
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version. ex)1.0.0'
+        required: true
+jobs:
+  merge_release_branch:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Merge into develp
+      env:
+        BRANCH_NAME: release/${{ github.event.inputs.version }}
+      run: |
+        git checkout develop
+        git merge ${BRANCH_NAME}
+    - name: Merge into master
+      run: |
+        git checkout master
+        git merge ${{ jobs.merge_release_branch.env.BRANCH_NAME }}
+    - name: Delete release branch
+      run: |
+        git branch --delete ${{ jobs.merge_release_branch.env.BRANCH_NAME }}
+        git push --delete ${{ jobs.merge_release_branch.env.BRANCH_NAME }}
+  create_tag:
+    needs: merge_release_branch
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Create tag
+      env: 
+        TAG_NAME: v${{ github.event.inputs.version }}
+      run: |
+        git tag -a ${TAG_NAME}
+        git push origin ${TAG_NAME}
+  create_release:
+    needs: [merge_release_branch, create_tag]
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    # See: https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+    - name: Install GitHub CLI
+      run: |
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+        sudo apt-add-repository https://cli.github.com/packages
+        sudo apt update
+        sudo apt install gh
+    # See: https://cli.github.com/manual/gh_auth_login
+    # See: https://cli.github.com/manual/gh_release_create
+    - name: Create release
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      run: |
+        echo $GITHUB_TOKEN > token.txt
+        gh auth login --with-token < token.txt
+        gh release create ${{ jobs.create_tag.env.TAG_NAME }} -d -F .github/RELEASE_NOTE.md
+    
+  
