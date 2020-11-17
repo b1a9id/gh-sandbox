@@ -1,0 +1,19 @@
+name: Start release branch
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version. ex)1.0.0'
+        required: true
+env:
+  BRANCH_NAME: release/v${{ github.event.inputs.version }}
+jobs:
+  create_release_branch:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Create release branch
+      run: |
+        git checkout -b ${BRANCH_NAME}
+        git push origin ${BRANCH_NAME}
