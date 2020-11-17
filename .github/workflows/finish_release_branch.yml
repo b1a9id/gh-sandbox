@@ -16,10 +16,12 @@ jobs:
       uses: actions/checkout@v2
     - name: Merge into develp
       run: |
+        git fetch develop
         git checkout develop
         git merge ${BRANCH_NAME}
     - name: Merge into master
       run: |
+        git fetch master
         git checkout master
         git merge ${BRANCH_NAME}
     - name: Delete release branch
