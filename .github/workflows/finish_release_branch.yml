@@ -5,6 +5,9 @@ on:
       version:
         description: 'Release version. ex)1.0.0'
         required: true
+env:
+  BRANCH_NAME: release/${{ github.event.inputs.version }}
+  TAG_NAME: v${{ github.event.inputs.version }}
 jobs:
   merge_release_branch:
     runs-on: ubuntu-20.04
@@ -12,8 +15,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Merge into develp
-      env:
-        BRANCH_NAME: release/${{ github.event.inputs.version }}
       run: |
         git checkout develop
         git merge ${BRANCH_NAME}
@@ -31,9 +32,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Create tag
-      env: 
-        TAG_NAME: v${{ github.event.inputs.version }}
+    - name: Create tag 
       run: |
         git tag -a ${TAG_NAME}
         git push origin ${TAG_NAME}

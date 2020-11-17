@@ -5,6 +5,8 @@ on:
       version:
         description: 'Release version. ex)1.0.0'
         required: true
+env:
+  BRANCH_NAME: release/${{ github.event.inputs.version }}
 jobs:
   create_release_branch:
     runs-on: ubuntu-20.04
@@ -12,8 +14,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Create release branch
-      env:
-        BRANCH_NAME: release/${{ github.event.inputs.version }}
       run: |
         git checkout -b ${BRANCH_NAME}
         git push origin ${BRANCH_NAME}
