@@ -12,6 +12,8 @@ jobs:
   merge_release_branch:
     runs-on: ubuntu-20.04
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Merge into develop
       run: |
         git checkout ${BRANCH_NAME}
@@ -46,6 +48,8 @@ jobs:
     needs: [merge_release_branch, create_tag]
     runs-on: ubuntu-20.04
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Create release
       uses: actions/checkout@v2
       with:
