@@ -54,7 +54,8 @@ jobs:
     steps:
     - name: Create release
       uses: actions/checkout@v2
-      tag_name: ${TAG_NAME}
-      body_path: .github/RELEASE_NOTE.md
-      draft: true
+      with:
+        tag_name: ${TAG_NAME}
+        body_path: .github/RELEASE_NOTE.md
+        draft: true
   
