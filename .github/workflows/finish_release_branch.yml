@@ -14,18 +14,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Checkout develp
-      uses: actions/checkout@v2
-      with:
-        ref: develop
-    - name: Checkout master
-      uses: actions/checkout@v2
-      with:
-        ref: master
     - name: Merge into develop and master
       run: |
-        git checkout ${BRANCH_NAME}
         git checkout develop
+        git pull origin develop
         git merge --no-ff ${BRANCH_NAME}
         git push origin develop
         git checkout master
