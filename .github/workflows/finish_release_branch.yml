@@ -5,6 +5,9 @@ on:
       version:
         description: 'Release version. ex)1.0.0'
         required: true
+      release_date:
+        description: '2020-10-10'
+        required: true
 env:
   BRANCH_NAME: release/v${{ github.event.inputs.version }}
   TAG_NAME: v${{ github.event.inputs.version }}
@@ -63,7 +66,8 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
-        tag_name: ${TAG_NAME}
+        release_name: ${{ github.event.inputs.release_date }}
+        tag_name: ${{ env.TAG_NAME }}
         body_path: .github/RELEASE_NOTE.md
         draft: true
   
