@@ -12,26 +12,20 @@ jobs:
   merge_release_branch:
     runs-on: ubuntu-20.04
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Checkout develp
-      uses: actions/checkout@v2
-      with:
-        ref: develop
-    - name: Checkout master
-      uses: actions/checkout@v2
-      with:
-        ref: master
     - name: Merge into develop
       run: |
+        git checkout ${BRANCH_NAME}
         git checkout develop
         git merge --no-ff ${BRANCH_NAME}
         git push origin develop
+        git push origin ${BRANCH_NAME}
     - name: Merge into master
       run: |
+        git checkout ${BRANCH_NAME}
         git checkout master
         git merge --no-ff ${BRANCH_NAME}
         git push origin master
+        git push origin ${BRANCH_NAME}
     - name: Delete release branch
       run: |
         git branch --delete ${BRANCH_NAME}
