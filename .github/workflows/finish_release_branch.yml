@@ -22,16 +22,16 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: master
-    - name: Merge into develop and master
+    - name: Merge into develop
       run: |
         git checkout develop
-        git pull origin develop
         git merge --no-ff ${BRANCH_NAME}
         git push origin develop
+    - name: Merge into master
+      run: |
         git checkout master
         git merge --no-ff ${BRANCH_NAME}
         git push origin master
-        git push origin ${BRANCH_NAME}
     - name: Delete release branch
       run: |
         git branch --delete ${BRANCH_NAME}
