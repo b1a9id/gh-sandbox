@@ -14,11 +14,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Merge into develp
+    - name: Checkout develp
       uses: actions/checkout@v2
       with:
         ref: develop
-    - name: Merge into master
+    - name: Checkout master
       uses: actions/checkout@v2
       with:
         ref: master
