@@ -50,7 +50,7 @@ jobs:
         git config --local user.email ${{ secrets.EMAIL }}
     - name: Create tag 
       run: |
-        git tag -a ${TAG_NAME}
+        git tag ${TAG_NAME}
         git push origin ${TAG_NAME}
   create_release:
     needs: [merge_release_branch, create_tag]
