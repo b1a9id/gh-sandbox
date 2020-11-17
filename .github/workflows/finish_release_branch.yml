@@ -19,7 +19,7 @@ jobs:
     - name: Git config
       run: |
         git config --local user.name github-actions
-        git config --local user.email ${{ secret.EMAIL }}
+        git config --local user.email ${{ secrets.EMAIL }}
     - name: Merge into develop
       run: |
         git checkout develop
