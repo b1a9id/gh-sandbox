@@ -31,7 +31,7 @@ jobs:
         git checkout master
         git merge --no-ff ${BRANCH_NAME}
         git push origin master
-        git push origing ${BRANCH_NAME}
+        git push origin ${BRANCH_NAME}
     - name: Delete release branch
       run: |
         git branch --delete ${BRANCH_NAME}
@@ -52,21 +52,9 @@ jobs:
     needs: [merge_release_branch, create_tag]
     runs-on: ubuntu-20.04
     steps:
-    # See: https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-    - name: Install GitHub CLI
-      run: |
-        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-        sudo apt-add-repository https://cli.github.com/packages
-        sudo apt update
-        sudo apt install gh
-    # See: https://cli.github.com/manual/gh_auth_login
-    # See: https://cli.github.com/manual/gh_release_create
     - name: Create release
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      run: |
-        echo $GITHUB_TOKEN > token.txt
-        gh auth login --with-token < token.txt
-        gh release create ${TAG_NAME} -d -F .github/RELEASE_NOTE.md
-    
+      uses: actions/checkout@v2
+      tag_name: ${TAG_NAME}
+      body_path: .github/RELEASE_NOTE.md
+      draft: true
   
