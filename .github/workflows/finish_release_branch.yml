@@ -16,7 +16,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Merge into develop
       run: |
-        git checkout ${BRANCH_NAME}
         git checkout develop
         git merge --no-ff ${BRANCH_NAME}
         git push origin develop
