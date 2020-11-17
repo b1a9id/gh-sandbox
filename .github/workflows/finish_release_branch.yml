@@ -6,7 +6,7 @@ on:
         description: 'Release version. ex)1.0.0'
         required: true
 env:
-  BRANCH_NAME: release/${{ github.event.inputs.version }}
+  BRANCH_NAME: release/v${{ github.event.inputs.version }}
   TAG_NAME: v${{ github.event.inputs.version }}
 jobs:
   merge_release_branch:
@@ -24,14 +24,18 @@ jobs:
         ref: master
     - name: Merge into develop and master
       run: |
+        git checkout ${BRANCH_NAME}
         git checkout develop
-        git merge ${BRANCH_NAME}
+        git merge --no-ff ${BRANCH_NAME}
+        git push origing develop
         git checkout master
-        git merge ${BRANCH_NAME}
+        git merge --no-ff ${BRANCH_NAME}
+        git push origin master
+        git push origing ${BRANCH_NAME}
     - name: Delete release branch
       run: |
         git branch --delete ${BRANCH_NAME}
-        git push --delete ${BRANCH_NAME}
+        git push origin --delete ${BRANCH_NAME}
   create_tag:
     needs: merge_release_branch
     runs-on: ubuntu-20.04
