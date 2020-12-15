@@ -1,7 +1,7 @@
 on: push
 name: Slack Notification Demo
 jobs:
-  slack_otification:
+  slack_notification:
     name: Slack Notification
     runs-on: ubuntu-latest
     steps:
@@ -11,3 +11,15 @@ jobs:
       env:
         SLACK_CHANNEL: random
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_MESSAGE: 'Deploy Start'
+    - name: Hoge
+      run: echo 'hoge'
+    - name: End
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: random
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_MESSAGE: 'Deploy End'
+      
+    
+    
