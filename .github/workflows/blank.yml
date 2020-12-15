@@ -13,8 +13,6 @@ jobs:
         SLACK_MESSAGE: 'Deploy Start'
     - name: Hoge
       run: echo 'hoge'
-    - name: Failure job
-      run: exit 1
     - name: Fuga
       run: echo 'fuga'
     - name: End
