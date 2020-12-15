@@ -30,6 +30,4 @@ jobs:
         SLACK_CHANNEL: random
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_MESSAGE: 'Deploy failed'
-      
-    
-    
+        SLACK_COLOR: '#ff0000'
