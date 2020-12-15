@@ -1,4 +1,5 @@
 on: push
+
 jobs:
   slack_notification:
     name: Slack Notification
@@ -10,7 +11,7 @@ jobs:
       env:
         SLACK_CHANNEL: random
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_MESSAGE: 'Deploy Start'
+        SLACK_MESSAGE: 'Deploy Start: ${{ github.repository }} by ${{ github.actor }}'
     - name: Hoge
       run: echo 'hoge'
     - name: Fuga
