@@ -1,5 +1,4 @@
 on: push
-name: Slack Notification Demo
 jobs:
   slack_notification:
     name: Slack Notification
@@ -14,12 +13,23 @@ jobs:
         SLACK_MESSAGE: 'Deploy Start'
     - name: Hoge
       run: echo 'hoge'
+    - name: Failure job
+      run: exit 1
+    - name: Fuga
+      run: echo 'fuga'
     - name: End
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_CHANNEL: random
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_MESSAGE: 'Deploy End'
+    - name: Failed notification
+      if: failure()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: random
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_MESSAGE: 'Deploy failed'
       
     
     
