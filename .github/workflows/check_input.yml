@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Check
-        if: ${{ github.event.inputs.environment != 'test' || github.event.inputs.environment != 'staging' || github.event.inputs.environment != 'dev' }}
+        if: ${{ github.event.inputs.environment != 'test' }}
         run: |
           echo "::error ${{ github.event.inputs.environment }} is invalid. Environment must be 'test' or 'staging' or 'dev'."
           exit 1
