@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy service.(test or staging or dev)'
+        required: true
+        default: 'test'
+
+jobs:
+  check:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check input
+        run: echo "contains([ "test", "staging", "dev" ], github.event.inputs.environment)"
