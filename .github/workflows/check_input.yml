@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Check input
-        run: echo "VALID_ENVIRONEMT=" >> $GITHUB_ENV
       - name: Make it fail if invalid input
         if: ${{ contains(contains([ "test", "staging", "dev" ], github.event.inputs.environment), 'false')
         run: exit 1
