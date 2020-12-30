@@ -10,9 +10,13 @@ on:
 
 jobs:
   check:
-    if: contains(fromJson('["test", "staging", "dev"]'), github.event.inputs.environment)
     runs-on: ubuntu-20.04
     steps:
+      - name: Check
+        if: ${{ github.event.inputs.environment != 'test' || github.event.inputs.environment != 'staging' || github.event.inputs.environment != 'dev' }}
+        run: |
+          echo "::error ${{ github.event.inputs.environment }} is invalid. Environment must be 'test' or 'staging' or 'dev'."
+          exit 1
       - uses: actions/checkout@v2
       - name: Success
         run: echo 'success';
