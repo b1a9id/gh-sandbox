@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Make it fail if invalid input
-        if: ${{ contains(contains([ "test", "staging", "dev" ], github.event.inputs.environment), 'false')
+        if: ${{ contains(contains([ "test", "staging", "dev" ], github.event.inputs.environment), 'false') }}
         run: exit 1
       - name: Success
         run: echo 'success';
