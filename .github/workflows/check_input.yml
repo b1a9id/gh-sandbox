@@ -10,11 +10,9 @@ on:
 
 jobs:
   check:
+    if: contains(fromJson('["test", "staging", "dev"]'), github.event.inputs.environment)
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Make it fail if invalid input
-        if: ${{ contains(contains([ "test", "staging", "dev" ], github.event.inputs.environment), 'false') }}
-        run: exit 1
       - name: Success
         run: echo 'success';
