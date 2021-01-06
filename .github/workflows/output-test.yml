@@ -17,7 +17,7 @@ jobs:
           echo IMAGE_TAG=$(echo feature/output-sample | sed -e 's|[\\._/]|-|g')-$(echo ${GITHUB_SHA} | cut -c 1-8)
           echo ::set-output name=image_tag::${IMAGE_TAG}
       - name: Output
-        run: echo ${{ jobs.job1.outputs.image_tag }}
+        run: echo ${{ job1.outputs.image_tag }}
           
   job2:
     needs: [job1]
