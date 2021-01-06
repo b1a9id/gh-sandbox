@@ -15,6 +15,9 @@ jobs:
         id: op
         run: |
           echo "::set-output name=image_tag::$(echo feature/output-sample | sed -e 's|[\\._/]|-|g')-$(echo ${GITHUB_SHA} | cut -c 1-8)"
+      - name: Output value
+        run: |
+          echo ${{ steps.op.outputs.image_tag }}
           
   job2:
     runs-on: ubuntu-20.04
