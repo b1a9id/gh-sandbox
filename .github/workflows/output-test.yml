@@ -11,11 +11,14 @@ jobs:
     outputs:
       image_tag: ${{ steps.op.outputs.image_tag }}
     steps:
-      - name: Output
+      - name: Set value
         id: op
         run: |
           echo IMAGE_TAG=$(echo feature/output-sample | sed -e 's|[\\._/]|-|g')-$(echo ${GITHUB_SHA} | cut -c 1-8)
           echo ::set-output name=image_tag::${IMAGE_TAG}
+      - name: Output
+        run: echo ${{ jobs.job1.outputs.image_tag }}
+          
   job2:
     needs: [job1]
     runs-on: ubuntu-20.04
