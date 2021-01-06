@@ -1,0 +1,24 @@
+name: Output Sample
+
+on:
+  push:
+    branches: 
+      - feature/output-sample
+
+jobs:
+  job1:
+    runs-on: ubuntu-20.04
+    outputs:
+      image_tag: ${{ steps.op.outputs.image_tag }}
+    steps:
+      - name: Set value
+        id: op
+        run: |
+          echo "::set-output name=image_tag::$(echo feature/output-sample | sed -e 's|[\\._/]|-|g')-$(echo ${GITHUB_SHA} | cut -c 1-8)"
+          
+  job2:
+    runs-on: ubuntu-20.04
+    needs: [job1]
+    steps:
+      - name: Output Test
+        run: echo ${{ needs.job1.outputs.image_tag }}
