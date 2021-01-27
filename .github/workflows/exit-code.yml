@@ -11,7 +11,7 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
       - name: Exit test
-        run: exit 1
+        run: exit 0
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
