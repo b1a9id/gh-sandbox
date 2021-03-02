@@ -1,7 +1,6 @@
 name: Cron Sample
 on:
-  schedule:
-    - cron: '0 1 * * *'
+  push:
   workflow_dispatch:
     inputs:
       deploy_target:
@@ -20,4 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run a one-line script
-        run: echo $ENV
+        run: |
+          - echo $ENV
+          - echo $GITHUB_EVENT_NAME
