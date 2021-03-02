@@ -20,5 +20,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run a one-line script
         run: |
-          - echo $ENV
-          - echo $GITHUB_EVENT_NAME
+          echo $ENV
+          echo $GITHUB_EVENT_NAME
