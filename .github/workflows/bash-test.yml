@@ -1,0 +1,12 @@
+name: Check input
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Echo
+        run: bash .github/sample.sh
