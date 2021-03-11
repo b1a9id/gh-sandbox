@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 declare -A musics=(
         ["ultra soul"]="2001"
