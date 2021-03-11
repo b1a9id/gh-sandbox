@@ -1,4 +1,4 @@
-name: Check input
+name: Bash test
 
 on:
   workflow_dispatch:
