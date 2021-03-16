@@ -3,11 +3,11 @@ on:
   workflow_dispatch:
   
 jobs:
-  buil_variable:
+  build_variable:
     runs-on: ubunts-latest
     outputs:
-      environment: ${{ steps.set-deploy-info.environment }}
-      deploy_target: ${{ steps.set-deploy-info.deploy_target }}
+      environment: ${{ steps.set-deploy-info.outputs.environment }}
+      deploy_target: ${{ steps.set-deploy-info.outputs.deploy_target }}
     steps:
       - name: Set deploy info
         id: set-deploy-info
@@ -16,11 +16,11 @@ jobs:
           echo "::set-output deploy_target=develop"
         shell: bash
   op:
-    needs: [buil_variable]
+    needs: [build_variable]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Output env
         run: |
-          echo ${{ buil_variable.outputs.environment }}
-          echo ${{ buil_variable.outputs.deploy_target }}
+          echo ${{ build_variable.outputs.environment }}
+          echo ${{ build_variable.outputs.deploy_target }}
