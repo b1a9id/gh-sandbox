@@ -3,17 +3,24 @@ on:
   workflow_dispatch:
   
 jobs:
-  op:
-    runs-on: ubuntu-latest
+  buil_variable:
+    runs-on: ubunts-latest
+    outputs:
+      environment: ${{ steps.set-deploy-info.environment }}
+      deploy_target: ${{ steps.set-deploy-info.deploy_target }}
     steps:
-      - uses: actions/checkout@v2
-      - name: Build outputs variable
-        id: build-variable
+      - name: Set deploy info
+        id: set-deploy-info
         run: |
           echo "::set-output environment=dev"
           echo "::set-output deploy_target=develop"
         shell: bash
+  op:
+    needs: [buil_variable]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
       - name: Output env
         run: |
-          echo ${{ steps.build-variable.outputs.environment }}
-          echo ${{ steps.build-variable.outputs.deploy_target }}
+          echo ${{ buil_variable.outputs.environment }}
+          echo ${{ buil_variable.outputs.deploy_target }}
