@@ -4,25 +4,18 @@ on:
 env:
   ENVIRONMENT: dev
   DEPLOY_TARGET: develop
-jobs:
-  build_variable:
+jobs: 
+  op:
     runs-on: ubuntu-latest
-    outputs:
-      environment: ${{ steps.set-deploy-info.outputs.environment }}
-      deploy_target: ${{ steps.set-deploy-info.outputs.deploy_target }}
     steps:
+      - uses: actions/checkout@v2
       - name: Set deploy info
         id: set-deploy-info
         run: |
           echo "::set-output name=environment::$ENVIRONMENT"
           echo "::set-output name=deploy_target::$DEPLOY_TARGET"
         shell: bash
-  op:
-    needs: build_variable
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
       - name: Output env
         run: |
-          echo ${{ needs.build_variable.outputs.environment }}
-          echo ${{ needs.build_variable.outputs.deploy_target }}
+          echo ${{ steps.set-deploy-info.outputs.environment }}
+          echo ${{ steps.set-deploy-info.outputs.deploy_target }}
