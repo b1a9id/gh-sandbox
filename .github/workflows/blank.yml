@@ -1,0 +1,13 @@
+name: Outputs sample
+on:
+  workflow_dispatch:
+
+jobs:
+  output:
+    runs-on: ubuntu-latest
+    outputs:
+      environment: dev
+    steps:
+      - uses: actions/checkout@v2
+      - name: Output env
+        run: echo ${{ outputs.environment }}
