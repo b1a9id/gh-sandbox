@@ -6,7 +6,7 @@ env:
   DEPLOY_TARGET: develop
 jobs:
   build_variable:
-    runs-on: ubunts-latest
+    runs-on: ubuntu-latest
     outputs:
       environment: ${{ steps.set-deploy-info.outputs.environment }}
       deploy_target: ${{ steps.set-deploy-info.outputs.deploy_target }}
