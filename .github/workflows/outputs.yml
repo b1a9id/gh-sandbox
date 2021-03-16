@@ -12,11 +12,11 @@ jobs:
       - name: Set deploy info
         id: set-deploy-info
         run: |
-          echo "::set-output environment=dev"
-          echo "::set-output deploy_target=develop"
+          echo "::set-output name=environment::dev"
+          echo "::set-output name=deploy_target::develop"
         shell: bash
   op:
-    needs: [build_variable]
+    needs: build_variable
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
