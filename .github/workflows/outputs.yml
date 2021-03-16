@@ -1,13 +1,22 @@
 name: Outputs sample
 on:
   workflow_dispatch:
-
+  
 jobs:
-  output:
+  op:
     runs-on: ubuntu-latest
     outputs:
-      environment: dev
+      environment: ${{ steps.build-variable.outputs.environment }}
+      deploy_target: ${{ steps.build-variable.outputs.deploy_target }}
     steps:
       - uses: actions/checkout@v2
+      - name: Build outputs variable
+        id: build-variable
+        run: |
+          echo "::set-output environment=dev"
+          echo "::set-output deploy_target=develop"
+        shell: bash
       - name: Output env
-        run: echo ${{ outputs.environment }}
+        run: |
+          echo ${{ outputs.environment }}
+          echo ${{ outputs.deploy_target }}
