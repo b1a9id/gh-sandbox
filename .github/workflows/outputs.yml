@@ -15,5 +15,5 @@ jobs:
         shell: bash
       - name: Output env
         run: |
-          echo ${{ stepts.build-variable.outputs.environment }}
-          echo ${{ stepts.build-variable.outputs.deploy_target }}
+          echo ${{ steps.build-variable.outputs.environment }}
+          echo ${{ steps.build-variable.outputs.deploy_target }}
