@@ -5,9 +5,6 @@ on:
 jobs:
   op:
     runs-on: ubuntu-latest
-    outputs:
-      environment: ${{ steps.build-variable.outputs.environment }}
-      deploy_target: ${{ steps.build-variable.outputs.deploy_target }}
     steps:
       - uses: actions/checkout@v2
       - name: Build outputs variable
@@ -18,5 +15,5 @@ jobs:
         shell: bash
       - name: Output env
         run: |
-          echo ${{ outputs.environment }}
-          echo ${{ outputs.deploy_target }}
+          echo ${{ stepts.build-variable.outputs.environment }}
+          echo ${{ stepts.build-variable.outputs.deploy_target }}
