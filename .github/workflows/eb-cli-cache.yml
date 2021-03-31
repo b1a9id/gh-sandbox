@@ -11,7 +11,9 @@ jobs:
         id: cache-brew
         uses: actions/cache@v2
         with:
-          path: ~/.cache/Homebrew
+          path: |
+            ~/.cache/Homebrew
+            /home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew
           key: brew-${{ hashFiles('.github/brew-formulae') }}
           restore-keys: brew-
       - name: Install EB CLI
