@@ -20,5 +20,6 @@ jobs:
         run: pip install -U awsebcli
       - name: EB cli
         run: |
+          ls -al ~/.local/bin
           which eb
           eb --version
