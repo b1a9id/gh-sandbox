@@ -19,6 +19,9 @@ jobs:
       - name: Install EB CLI
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install awsebcli
       - name: Show cache
-        run: brew --cache
+        run: |
+          brew --cache
+          ls -al ~/.cache/Homebrew
+          ls -al ~/.cache/Homebrew/downloads
       - name: EB cli help
         run: eb -h
