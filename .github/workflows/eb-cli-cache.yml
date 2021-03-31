@@ -7,21 +7,15 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Cache EB CLI
-        id: cache-eb-cli
+      - name: Cache brew
+        id: cache-brew
         uses: actions/cache@v2
         with:
-          path: |
-            ~/.cache/Homebrew/awsebcli--*
-            ~/.cache/Homebrew/downloads/*--awsebcli-*
+          path: ~/.cache/Homebrew
           key: brew-${{ hashFiles('.github/brew-formulae') }}
           restore-keys: brew-
       - name: Install EB CLI
+        if: steps.cache-brew.outputs.cache-hit != 'true'
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install awsebcli
-      - name: Show cache
-        run: |
-          brew --cache
-          ls -al ~/.cache/Homebrew
-          ls -al ~/.cache/Homebrew/downloads
       - name: EB cli help
         run: eb -h
