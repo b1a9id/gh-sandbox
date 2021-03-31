@@ -13,7 +13,7 @@ jobs:
         with:
           path: |
             ~/.cache/Homebrew
-            /home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew
+            /home/linuxbrew/.linuxbrew
           key: brew-${{ hashFiles('.github/brew-formulae') }}
           restore-keys: brew-
       - name: Install EB CLI
