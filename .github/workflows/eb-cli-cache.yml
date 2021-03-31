@@ -16,11 +16,11 @@ jobs:
             /home/linuxbrew/.linuxbrew/Cellar/aws-elasticbeanstalk
           key: ${{ runner.os }}-ebcli-${{ hashFiles('.github/brew-formulae') }}
           restore-keys: ${{ runner.os }}-ebcli-
-      - name: Install EB CLI
-        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install awsebcli
+      - uses: actions/setup-python@master
+        with:
+          python-version: '3.9'
+      - name: Install awsebcli
+        run: pip install -U awsebcli
       - name: EB cli help
-        run: |
-          ls -al /home/linuxbrew/.linuxbrew/Cellar/aws-elasticbeanstalk/3.19.4/
-          ls -al /home/linuxbrew/.linuxbrew/Cellar/aws-elasticbeanstalk/3.19.4/libexec/bin
-          brew link aws-elasticbeanstalk
-          eb -h
+        run:
+          eb --version
