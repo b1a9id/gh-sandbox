@@ -7,15 +7,15 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Cache brew
-        id: cache-ebcli
-        uses: actions/cache@v2
-        with:
-          path: |
-            /home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew
-            /home/linuxbrew/.linuxbrew/Cellar/aws-elasticbeanstalk
-          key: ${{ runner.os }}-ebcli-${{ hashFiles('.github/brew-formulae') }}
-          restore-keys: ${{ runner.os }}-ebcli-
+#      - name: Cache brew
+#        id: cache-ebcli
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            /home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew
+#            /home/linuxbrew/.linuxbrew/Cellar/aws-elasticbeanstalk
+#          key: ${{ runner.os }}-ebcli-${{ hashFiles('.github/brew-formulae') }}
+#          restore-keys: ${{ runner.os }}-ebcli-
       - uses: actions/setup-python@master
         with:
           python-version: '3.9'
