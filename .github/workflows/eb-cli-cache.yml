@@ -11,7 +11,9 @@ jobs:
         id: cache-ebcli
         uses: actions/cache@v2
         with:
-          path: /home/linuxbrew/.linuxbrew/Cellar/aws-elasticbeanstalk
+          path: |
+            /home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew
+            /home/linuxbrew/.linuxbrew/Cellar/aws-elasticbeanstalk
           key: ${{ runner.os }}-ebcli-${{ hashFiles('.github/brew-formulae') }}
           restore-keys: ${{ runner.os }}-ebcli-
       - name: Install EB CLI
