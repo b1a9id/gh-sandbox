@@ -20,4 +20,6 @@ jobs:
         if: steps.cache-pip.outputs.cache-hit != 'true'
         run: pip install -U awsebcli
       - name: EB cli
-        run: eb --version
+        run: |
+          export PATH=~/.local/bin:$PATH
+          eb --version
