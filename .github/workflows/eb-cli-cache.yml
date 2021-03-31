@@ -17,6 +17,7 @@ jobs:
         with:
           python-version: '3.9'
       - name: Install awsebcli
+        if: steps.cache-pip.outputs.cache-hit != 'true'
         run: pip install -U awsebcli
       - name: EB cli
         run: |
