@@ -20,5 +20,7 @@ jobs:
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install awsebcli
       - name: EB cli help
         run: |
+          ls -al /home/linuxbrew/.linuxbrew/Cellar/aws-elasticbeanstalk/3.19.4/
+          ls -al /home/linuxbrew/.linuxbrew/Cellar/aws-elasticbeanstalk/3.19.4/libexec/bin
           brew link aws-elasticbeanstalk
           eb -h
