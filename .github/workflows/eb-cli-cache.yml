@@ -11,11 +11,9 @@ jobs:
         id: cache-brew
         uses: actions/cache@v2
         with:
-          path: |
-            ~/.cache/Homebrew
-            /home/linuxbrew/.linuxbrew
-          key: brew-${{ hashFiles('.github/brew-formulae') }}
-          restore-keys: brew-
+          path: /home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew
+          key: ${{ runner.os }}-brew-${{ hashFiles('.github/brew-formulae') }}
+          restore-keys: ${{ runner.os }}-brew-
       - name: Install EB CLI
         if: steps.cache-brew.outputs.cache-hit != 'true'
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install awsebcli
