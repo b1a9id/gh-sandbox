@@ -11,8 +11,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/Library/Caches/Homebrew/awsebcli--*
-            ~/Library/Caches/Homebrew/downloads/*--awsebcli-*
+            ~/.cache/Homebrew/awsebcli--*
+            ~/.cache/Homebrew/downloads/*--awsebcli-*
           key: brew-${{ hashFiles('.github/brew-formulae') }}
           restore-keys: brew-
       - name: Install EB CLI
