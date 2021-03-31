@@ -18,3 +18,5 @@ jobs:
       - name: Install EB CLI
         if: steps.cache.outputs.cache-hit != 'true'
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install awsebcli
+      - name: EB cli help
+        run: eb -h
