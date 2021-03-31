@@ -21,3 +21,5 @@ jobs:
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install awsebcli
       - name: EB cli help
         run: eb -h
+      - name: Shop cache
+        run: brew --cache
